@@ -1,4 +1,20 @@
 ⚠️ Early-stage execution infrastructure under active development.
+
+Market Data
+    ↓
+State Engine
+    ↓
+Regime Detection
+    ↓
+Permission Gate
+    ↓
+Health Model
+    ↓
+Decision Layer
+    ↓
+Execution Engine
+
+
 # Crypto Execution Lab
 
 Execution-first trading infrastructure designed to study system behavior under live market microstructure — without deploying capital.

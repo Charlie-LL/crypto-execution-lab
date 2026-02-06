@@ -3,7 +3,7 @@
 # ==============================
 # Market / WS
 # ==============================
-SYMBOL = "ethbtc"  # Use lowercase (stream builder will also .lower())
+SYMBOL = "btcusdt"  # Use lowercase (stream builder will also .lower())
 WS_BASE = "wss://stream.binance.com:9443/ws"
 
 # ==============================
@@ -17,6 +17,7 @@ FILES = {
     "alerts": "alerts.csv",
     "orders": "orders.csv",
     "fills": "fills.csv",
+    "metrics": "metrics.csv",
 }
 
 # ==============================

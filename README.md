@@ -1,136 +1,316 @@
-⚠️ Early-stage execution infrastructure under active development.
+# crypto-execution-lab-v1
 
-Market Data
-    ↓
-State Engine
-    ↓
-Regime Detection
-    ↓
-Permission Gate
-    ↓
-Health Model
-    ↓
-Decision Layer
-    ↓
-Execution Engine
+crypto-execution-lab is a research-oriented execution infrastructure designed to study how trading systems behave once exposed to real market microstructure.
 
+The objective is not signal generation.  
+The objective is execution understanding.
 
-# Crypto Execution Lab
+Markets rarely fail because signals are unavailable.  
+They fail because interaction with liquidity is poorly understood.
 
-Execution-first trading infrastructure designed to study system behavior under live market microstructure — without deploying capital.
-
-This repository focuses on one question:
-
-**How should a trading system behave before it is allowed to trade?**
-
-Prediction is treated as a downstream concern.  
-Execution stability is treated as a prerequisite.
+This repository exists to reduce that gap.
 
 ---
 
-## System Overview
+## Orientation
 
-The architecture transforms raw market data into constrained execution decisions through layered interpretation:
+A trading system is treated here as a controlled machine operating under uncertainty.
 
-market data → state → regime → permission → health → decision → paper execution
+Decisions are not isolated outputs of strategy.  
+They are consequences of layered interpretation:
 
-Each layer exists to reduce uncertainty before interacting with liquidity.
+# crypto-execution-lab
 
-The objective is not feature accumulation, but behavioral determinism.
+crypto-execution-lab is a research-oriented execution infrastructure designed to study how trading systems behave once exposed to real market microstructure.
+
+The objective is not signal generation.  
+The objective is execution understanding.
+
+Markets rarely fail because signals are unavailable.  
+They fail because interaction with liquidity is poorly understood.
+
+This repository exists to reduce that gap.
 
 ---
 
-## Core Components
+## Orientation
 
-**Market Observer**
-- Real-time trade and bookTicker ingestion
-- Rolling microstructure metrics
-- Structured event logging
+A trading system is treated here as a controlled machine operating under uncertainty.
 
-**Regime Engine**
-- Classifies structural market conditions  
-  (NORMAL / FAST / UNSTABLE)
-- Detects shifts in liquidity and trading intensity rather than forecasting price
+Decisions are not isolated outputs of strategy.  
+They are consequences of layered interpretation:
 
-**Permission Engine**
-- Stateful execution gate
-- Cooldown and probation mechanics
-- Prevents participation during structurally unstable periods
+market perception → state formation → constraint enforcement → execution → measurement
 
-**Health Model**
-- Multi-factor execution safety scoring
-- Produces bounded aggressiveness:
-  - GREEN → controlled liquidity taking permitted  
-  - YELLOW → passive interaction preferred  
-  - RED → no participation  
+Each layer exists to reduce ambiguity before capital is placed at risk.
 
-**Decision Layer**
-- Converts system state into explicit execution constraints:
-  - trade eligibility  
-  - aggressiveness ceiling  
-  - risk budget  
-
-**Paper Execution Engine**
-- Simulated order placement driven by live BBO
-- Measures fill behavior, slippage, and execution latency
-- Validates infrastructure before capital exposure
-
-**Observability**
-- Full lifecycle logging across all layers  
-- Designed for replay, diagnosis, and behavioral audit
-
-A system that cannot explain its actions is considered operationally unsafe.
+Execution, in this context, is less about speed than about behavioral stability.
 
 ---
 
 ## Design Principles
 
-**Determinism over reactivity**  
-Improvised behavior is a primary source of execution risk.
+**State-aware execution**  
+Execution decisions should emerge from explicit market state rather than reactive impulses.
 
-**Constraints precede capital**  
-Optionality collapses once orders meet liquidity.
+**Constraint-first architecture**  
+Risk is easier to prevent than to correct. System constraints are applied before orders interact with liquidity.
 
-**State reduces ambiguity**  
-Explicit system state compresses market complexity into actionable structure.
+**Observability over opacity**  
+A system that cannot explain its behavior is structurally fragile. Metrics are treated as first-class citizens.
 
-**Execution is an infrastructure problem**  
-Strategy defines intent. Infrastructure governs survivability.
+**Liquidity as the operating environment**  
+Price is only a surface artifact. Liquidity determines survivability.
 
-**Liquidity is the operating environment**  
-Price is a secondary artifact.
-
----
-
-## Repository Structure
-observer/ market ingestion, regime detection, logging
-engine/ state modeling and decision logic
-permission/ execution gating state machine
-health/ execution safety scoring
-risk/ guardrails and alerts
-execution/ paper order engine
-
-
-The system is intentionally modular to allow execution behavior to evolve independently from strategy research.
+**Determinism over improvisation**  
+Systems that improvise under stress tend to externalize risk.
 
 ---
 
-## Project Trajectory
+## System Architecture
 
-The architecture is evolving toward production-grade properties:
+The repository follows a layered execution model:
 
-- predictable behavior under stress  
-- explicit execution boundaries  
-- constrained liquidity interaction  
-- internal transparency  
-- failure-aware design  
+### Observer Layer
 
-Progress is evaluated by behavioral stability rather than feature breadth.
+Responsible for market ingestion and state construction.
+
+- WebSocket market data
+- MarketState modeling
+- Regime detection inputs
+- Structured logging
+
+### Safety Layer
+
+Constrains execution before orders are allowed to exist.
+
+- Permission engine (state machine)
+- Health scoring
+- Risk guards
+- Decision synthesis
+
+### Execution Layer
+
+Controls the full lifecycle of an order.
+
+- Placement
+- Repricing
+- Cancellation
+- Fill simulation
+- Policy-driven aggressiveness
+
+### Metrics Layer
+
+Measures execution quality rather than trading outcome.
+
+- Fill rate  
+- Cancel rate  
+- Queue wait time  
+- Slippage  
+- Markout  
+
+The goal is not merely to trade — but to understand *how* trades occur.
 
 ---
 
-## Scope
+## Current Scope — Execution Core (v1)
 
-This repository is an execution research environment.
+Version 1 focuses on L1-driven execution behavior with passive-first interaction.
 
-It does **not** place live trades.
+**Included capabilities:**
+
+- State-driven execution decisions  
+- Permission-based order gating  
+- Health-aware aggressiveness  
+- Symbol-ready tuning  
+- Order lifecycle tracking  
+- Markout-based execution quality measurement  
+
+**Intentionally excluded:**
+
+- Alpha generation  
+- Strategy optimization  
+- Reinforcement learning  
+- L2 orderbook modeling  
+
+Complexity is deferred until behavior is understood.
+
+---
+
+## What This Repository Is Not
+
+This is **not**:
+
+- a signal factory  
+- a backtesting playground  
+- a high-frequency trading system  
+- an AI trading experiment  
+
+It is an execution research environment.
+
+---
+
+## Running the System
+
+Output directories can be configured via environment variable:
+
+### PowerShell
+
+```powershell
+$env:QUANT_OUT_DIR="D:\execution-data"
+python -m observer.run
+
+
+Each layer exists to reduce ambiguity before capital is placed at risk.
+
+Execution, in this context, is less about speed than about behavioral stability.
+
+---
+
+## Design Principles
+
+**State-aware execution**  
+Execution decisions should emerge from explicit market state rather than reactive impulses.
+
+**Constraint-first architecture**  
+Risk is easier to prevent than to correct. System constraints are applied before orders interact with liquidity.
+
+**Observability over opacity**  
+A system that cannot explain its behavior is structurally fragile. Metrics are treated as first-class citizens.
+
+**Liquidity as the operating environment**  
+Price is only a surface artifact. Liquidity determines survivability.
+
+**Determinism over improvisation**  
+Systems that improvise under stress tend to externalize risk.
+
+---
+
+## System Architecture
+
+The repository follows a layered execution model:
+
+### Observer Layer
+Responsible for market ingestion and state construction.
+
+- WebSocket market data
+- MarketState modeling
+- Regime detection inputs
+- Structured logging
+
+### Safety Layer
+Constrains execution before orders are allowed to exist.
+
+- Permission engine (state machine)
+- Health scoring
+- Risk guards
+- Decision synthesis
+
+### Execution Layer
+Controls the full lifecycle of an order.
+
+- Placement
+- Repricing
+- Cancellation
+- Fill simulation
+- Policy-driven aggressiveness
+
+### Metrics Layer
+Measures execution quality rather than trading outcome.
+
+- Fill rate  
+- Cancel rate  
+- Queue wait time  
+- Slippage  
+- Markout  
+
+The goal is not merely to trade — but to understand *how* trades occur.
+
+---
+
+## Current Scope — Execution Core (v1)
+
+Version 1 focuses on L1-driven execution behavior with passive-first interaction.
+
+**Included capabilities:**
+
+- State-driven execution decisions  
+- Permission-based order gating  
+- Health-aware aggressiveness  
+- Symbol-ready tuning  
+- Order lifecycle tracking  
+- Markout-based execution quality measurement  
+
+**Intentionally excluded:**
+
+- Alpha generation  
+- Strategy optimization  
+- Reinforcement learning  
+- L2 orderbook modeling  
+
+Complexity is deferred until behavior is understood.
+
+---
+
+## What This Repository Is Not
+
+This is **not**:
+
+- a signal factory  
+- a backtesting playground  
+- a high-frequency trading system  
+- an AI trading experiment  
+
+It is an execution research environment.
+
+---
+
+## Running the System
+
+Output directories can be configured via environment variable:
+
+### PowerShell
+```powershell
+$env:QUANT_OUT_DIR="D:\execution-data"
+python -m observer.run
+
+### macOS / Linux
+```bash
+export QUANT_OUT_DIR="/execution-data"
+python -m observer.run
+
+```php-template
+### Data will be written to:
+
+<OUT_DIR>/symbol=<symbol>/
+
+### Research Workflow
+
+The intended usage pattern is observational:
+
+1.Run the system across markets with different liquidity profiles.
+
+2.Compare execution metrics.
+
+3.Identify behavioral differences.
+
+4.Form hypotheses.
+
+5.Adjust execution parameters.
+
+6.Repeat.
+
+The repository is designed to support long-horizon learning rather than short-term experimentation.
+
+### Design Position
+
+Strategy determines direction.
+Infrastructure determines survivability.
+
+In adversarial environments, survivability compounds.
+
+### Status
+
+Execution Core — v1 (Architecture Frozen)
+
+Future evolution will prioritize behavioral research over architectural expansion.

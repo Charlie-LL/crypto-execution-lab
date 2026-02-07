@@ -157,14 +157,15 @@ class MarketObserver:
             )
             self.ms.prune_trades(recv_ts)
 
-        self.trades_log.write({
-            "exch_ts": exch_ts,
-            "recv_ts": recv_ts,
-            "latency_ms": latency,
-            "price": price,
-            "qty": qty,
-            "is_buyer_maker": is_buyer_maker
-        })
+        if config.LOG_TRADES:
+            self.trades_log.write({
+                "exch_ts": exch_ts,
+                "recv_ts": recv_ts,
+                "latency_ms": latency,
+                "price": price,
+                "qty": qty,
+                "is_buyer_maker": is_buyer_maker
+            })
 
         if latency > config.LAT_UNSTABLE_MS:
             self.guard.alert(
@@ -196,15 +197,16 @@ class MarketObserver:
             spread = self.ms.spread
             mid = self.ms.mid
 
-        self.bbo_log.write({
-            "recv_ts": recv_ts,
-            "bid_px": bid_px,
-            "bid_sz": bid_sz,
-            "ask_px": ask_px,
-            "ask_sz": ask_sz,
-            "spread": "" if spread is None else spread,
-            "mid": "" if mid is None else mid
-        })
+        if config.LOG_BBO:
+            self.bbo_log.write({
+                "recv_ts": recv_ts,
+                "bid_px": bid_px,
+                "bid_sz": bid_sz,
+                "ask_px": ask_px,
+                "ask_sz": ask_sz,
+                "spread": "" if spread is None else spread,
+                "mid": "" if mid is None else mid
+            })
 
         # ---- metrics markout tracking ----
         if mid is not None:

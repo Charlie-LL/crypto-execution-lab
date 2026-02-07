@@ -3,7 +3,7 @@
 # ==============================
 # Market / WS
 # ==============================
-SYMBOL = "btcusdt"  # Use lowercase (stream builder will also .lower())
+SYMBOL = "ethbtc"  # Use lowercase (stream builder will also .lower())
 WS_BASE = "wss://stream.binance.com:9443/ws"
 
 # ==============================
@@ -19,6 +19,13 @@ FILES = {
     "fills": "fills.csv",
     "metrics": "metrics.csv",
 }
+
+# ------------------------------
+# Noise control: raw data logging
+# ------------------------------
+# trades.csv / bbo.csv are extremely high volume. Keep OFF by default.
+LOG_TRADES = False
+LOG_BBO = False
 
 # ==============================
 # Observer cadence

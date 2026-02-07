@@ -1,7 +1,10 @@
 import json
 import time
 import threading
-import websocket
+try:
+    import websocket
+except ModuleNotFoundError:
+    websocket = None
 
 from observer import config
 from observer.utils import now_ms
@@ -325,7 +328,6 @@ class MarketObserver:
     # ======================================================
     # START
     # ======================================================
-
     def start(self):
 
         url = stream_url()

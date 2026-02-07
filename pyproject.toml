@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crypto-execution-lab"
+version = "0.1.0"
+description = "Research-oriented execution infrastructure for studying execution behavior under crypto market microstructure."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Charlie" }]
+dependencies = [
+  "websocket-client>=1.6.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6.0"
+]
+
+[tool.setuptools]
+# 关键：显式声明你的顶层包（就是这些文件夹名）
+packages = ["engine", "execution", "health", "observer", "permission", "risk"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
